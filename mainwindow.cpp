@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , timerRunning(false)
 {
     ui->setupUi(this);
-    ui->label->setStyleSheet("font-size:28pt; font-weight:700; text-align: center;");
+    ui->label->setStyleSheet("font-size:28pt; font-weight:700; text-align: center; color: white");
     ui->label->setText("00:00:00");
 
     connect(ui->startBtn, &QPushButton::clicked, this, &MainWindow::startStopTimer);
@@ -30,7 +30,7 @@ void MainWindow::startStopTimer()
 {
     if (timerRunning) {
         timer->stop();
-        ui->startBtn->setText("Start");
+        ui->startBtn->setText("START");
         timerRunning = false;
     } else {
         int hours = ui->hrsSpinbox->value();
@@ -40,7 +40,7 @@ void MainWindow::startStopTimer()
 
         if (remainingTime > 0) {
             timer->start(1000);
-            ui->startBtn->setText("Stop");
+            ui->startBtn->setText("STOP");
             timerRunning = true;
         }
     }
@@ -58,7 +58,7 @@ void MainWindow::updateDisplay()
         ui->label->setText(QString::asprintf("%02d:%02d:%02d", hours, minutes, seconds));
     } else {
         timer->stop();
-        ui->startBtn->setText("Start");
+        ui->startBtn->setText("START");
         timerRunning = false;
     }
 }
@@ -69,7 +69,7 @@ void MainWindow::resetTimer()
     remainingTime = 0;
 
     ui->label->setText("00:00:00");
-    ui->startBtn->setText("Start");
+    ui->startBtn->setText("START");
     timerRunning = false;
 
     ui->hrsSpinbox->setValue(0);
